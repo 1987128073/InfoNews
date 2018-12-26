@@ -25,3 +25,6 @@ class DevelopmentConfig(Config):  # 开发环境配置信息
 
 class ProductionConfig(Config):  # 生产环境配置信息
     DEBUG = False
+
+
+config = {'dev': DevelopmentConfig, 'pro': ProductionConfig}

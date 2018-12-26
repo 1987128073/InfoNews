@@ -4,18 +4,27 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from redis import Redis
 
-from config import DevelopmentConfig
+
+# 定义全局变量, 记录数据库连接对象, 以便其他文件可以使用
+from config import config
+
+db = None  # type: SQLAlchemy
+rs = None  # type: Redis
 
 
-def create_app():
+def create_app(config_type):
+
+    config_type = config[config_type]
+    # 创建web应用
     app = Flask(__name__)
-
     # 从对象中加载配置
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(config_type)
+    # 定义全局变量
+    global db, rs
     # 创建msql连接对象
     db = SQLAlchemy(app)
     # 创建redis连接对象
-    rs = Redis(host=DevelopmentConfig.REDIS_HOST, port=DevelopmentConfig.REDIS_PORT)
+    rs = Redis(host=config_type.REDIS_HOST, port=config_type.REDIS_PORT)
     # 初始化Session对象
     Session(app)
     # 初始化迁移器

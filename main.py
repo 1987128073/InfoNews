@@ -3,7 +3,7 @@ from flask_script import Manager
 from info import create_app
 
 # 创建web应用
-app = create_app()
+app = create_app('dev')
 # 创建脚本管理
 mgr = Manager(app)
 # 使用管理器生成迁移命令
