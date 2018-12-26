@@ -10,10 +10,5 @@ mgr = Manager(app)
 mgr.add_command("mc", MigrateCommand)
 
 
-@app.route('/')
-def index():
-    return 'copy '
-
-
 if __name__ == '__main__':
     app.run(debug=True)

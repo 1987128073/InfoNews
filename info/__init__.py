@@ -21,4 +21,8 @@ def create_app():
     # 初始化迁移器
     Migrate(app, db)
 
+    # 注册蓝图
+    from info.home import home_blue  # 为了避免导入错误, 对于只使用一次的内容, 在使用前才导入
+    app.register_blueprint(home_blue)
+
     return app
