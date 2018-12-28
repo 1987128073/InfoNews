@@ -1,4 +1,4 @@
-from flask import session
+from flask import session, current_app
 
 from info.home import home_blue
 
@@ -7,3 +7,4 @@ from info.home import home_blue
 def index():
     session['name'] = 'zs'
     return 'copy '
+
